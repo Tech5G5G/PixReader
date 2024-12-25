@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "PixReader (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "PixReader (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
