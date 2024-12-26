@@ -1,3 +1,10 @@
+<h1 align="center"><img src="https://raw.githubusercontent.com/Tech5G5G/PixReader/refs/heads/master/PixReader/Assets/Original/PixReader%20Icon%20(Large).png" height="128"><br>PixReader</h1>
+<p align="center"><strong>Official reader of the PIX image format</strong></p>
+
+<p align="center">
+  <img src="https://github.com/Tech5G5G/PixReader/blob/master/PixReader/Assets/Showcase.png?raw=true">
+</p>
+
 ## What is a PIX?
 A PIX is an uncompressed, human-readable image format that supports ARGB. A PIX file is a list of dimensions, color hex codes, and new row codes.
 
@@ -31,3 +38,19 @@ The width is defined as 3 (pixels) and the height is defined as 2 (pixels). Then
 In the PixReader app, this image is outtputed:
 
 ![image](https://github.com/user-attachments/assets/4c4b232d-f575-43f2-9c8d-62af65c0381d)
+
+To try this image for your self, open [this file](https://github.com/Tech5G5G/PixReader/blob/master/Test%20pixes/Transparency%20Showcase.pix) in PixReader. Then, either press **Ctrl+Shift+R** or click **View>Remove pixel blur**
+
+## Installation
+Because I'm too lazy to either make PixReader unpackaged or create an app package and certificate, you have to build it yourself.
+
+In order to build PixReader yourself (assuming you've already built a [WinUI project](https://learn.microsoft.com/en-us/windows/apps/winui/winui3/) before and you have [Visual Studio](https://visualstudio.microsoft.com/) already installed), simply clone the repo, open **PixReader.sln** in Visual Studio, and run it packaged (unpackaged will result in an error as PixReader relies on an API that only works in packaged mode). PixReader should be built and automatically run.
+
+If an error occurs at any point in your usage, please [open an issue](https://github.com/Tech5G5G/PixReader/issues).
+
+## Conversion
+One interesting feature of the PixReader app is its ability to convert most popular image formats into PIX. How does it do this? Well, it's not as complicated as you may think.
+
+After choosing an image, a GDI+ bitmap is creating using the [System.Drawing.Bitmap](https://learn.microsoft.com/en-us/dotnet/api/system.drawing.bitmap?view=windowsdesktop-9.0) class in C#. Then (on a background thread so the UI isn't lagged), every pixel of the bitmap is looped through. For each pixel, 2 things occur. First, the color of the pixel is read using the [Bitmap.GetPixel()](https://learn.microsoft.com/en-us/dotnet/api/system.drawing.bitmap.getpixel?view=windowsdesktop-9.0#system-drawing-bitmap-getpixel(system-int32-system-int32)) method. Second, the pixel's color is added to a [System.Text.StringBuilder](https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder?view=net-9.0). Every time the end of a row in the bitmap is reached, a PIX **nr** code is added to the StringBuilder. Finally, a save location is chosen by the user, and the width and height of the PIX are written to the file, along with the StringBuilder (which contains all the color and new row codes).
+
+And that's basically how PixReader converts images to PIX.
