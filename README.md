@@ -8,7 +8,7 @@
 ## Getting Started
 In order to get started with PixReader, there are two pages of the wiki you should read first.
 
-* The first is (obviously) the [installation guide](https://github.com/Tech5G5G/PixReader/wiki/Installation)
-* The second is the [PIX file format documentation](https://github.com/Tech5G5G/PixReader/wiki/What-is-a-PIX%3F)
+* The [installation guide](https://github.com/Tech5G5G/PixReader/wiki/Installation)
+* The [PIX file format documentation](https://github.com/Tech5G5G/PixReader/wiki/What-is-a-PIX%3F)
 
 If you're curious and want to learn more about PixReader, you can read the [wiki](https://github.com/Tech5G5G/PixReader/wiki).
